@@ -1,1 +1,1 @@
-# python_szkolenie
+# Repozytorium do szkolenia Python dla testerów
