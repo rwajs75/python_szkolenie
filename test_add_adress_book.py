@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from data_adress import Data_adress
+from contacts import Contacts
 
 def is_alert_present(wd):
     try:
@@ -20,9 +20,9 @@ class test_add_adress_book(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, password="secret", username="admin")
         self.open_add_new(wd)
-        self.create_new_adress_book(wd, Data_adress(firstname="Roman", lastname="Wajs", nickname="rwajs",
-                               company="własna działalność", adress="ul. Czapli 3, 05-830 Nadarzyn", home="159753123",
-                               mobile="123654789", work="987654123", fax="456852159", email="rwajs@tlen.pl", byear="1975"))
+        self.create_new_adress_book(wd, Contacts(firstname="Roman", lastname="Wajs", nickname="rwajs",
+                                                 company="własna działalność", adress="ul. Czapli 3, 05-830 Nadarzyn", home="159753123",
+                                                 mobile="123654789", work="987654123", fax="456852159", email="rwajs@tlen.pl", byear="1975"))
         self.details(wd)
         self.logout(wd)
 
@@ -31,9 +31,9 @@ class test_add_adress_book(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, password="secret", username="admin")
         self.open_add_new(wd)
-        self.create_new_adress_book(wd, Data_adress(firstname="Roman1", lastname="Wajs1", nickname="rwajs1",
-                               company="własna działalność1", adress="ul. Czapli 3, 05-830 Nadarzyn1", home="159753123",
-                               mobile="123654789", work="987654123", fax="456852159", email="rwajs1@tlen.pl", byear="1979"))
+        self.create_new_adress_book(wd, Contacts(firstname="Roman1", lastname="Wajs1", nickname="rwajs1",
+                                                 company="własna działalność1", adress="ul. Czapli 3, 05-830 Nadarzyn1", home="159753123",
+                                                 mobile="123654789", work="987654123", fax="456852159", email="rwajs1@tlen.pl", byear="1979"))
         self.details(wd)
         self.logout(wd)
 

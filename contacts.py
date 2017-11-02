@@ -1,7 +1,7 @@
 __autor__ = 'Roman'
 
 
-class Data_adress:
+class Contacts:
     def __init__(self, firstname, lastname, nickname, company, adress, home, mobile, work, fax, email, byear):
         self.firstname = firstname
         self.lastname = lastname
