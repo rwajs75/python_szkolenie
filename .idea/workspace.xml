@@ -14,8 +14,8 @@
       <file leaf-file-name="test_add_group.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_add_group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="84">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="aplication.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/aplication.py">
+      <file leaf-file-name="application.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="638">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -86,12 +86,13 @@
         <option value="$PROJECT_DIR$/data_adress.py" />
         <option value="$PROJECT_DIR$/contacts.py" />
         <option value="$PROJECT_DIR$/test_add_adress_book.py" />
-        <option value="$PROJECT_DIR$/test_add_group.py" />
         <option value="$PROJECT_DIR$/aplication.py" />
+        <option value="$PROJECT_DIR$/test_add_group.py" />
+        <option value="$PROJECT_DIR$/application.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
     <option name="width" value="1938" />
@@ -128,7 +129,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.startup.tasks" />
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/GitHubDesktop.exe" />
   </component>
   <component name="RunDashboard">
@@ -143,7 +144,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.aplication">
+  <component name="RunManager" selected="Python.test_add_group">
     <configuration name="Unittests in test_add_group.py" type="tests" factoryName="Unittests" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -186,7 +187,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="python_szkolenie" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/aplication.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\rwajs\Documents\GitHub\python_szkolenie\application.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,7 +207,7 @@
       <option name="_new_target" value="&quot;$PROJECT_DIR$/test_add_adress_book.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="test_add_group" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test_add_group" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -226,14 +227,13 @@
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_add_group.py" />
       <item index="1" class="java.lang.String" itemvalue="Python.test_add_group" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_add_adress_book.py" />
-      <item index="3" class="java.lang.String" itemvalue="Python.aplication" />
+      <item index="2" class="java.lang.String" itemvalue="Python.aplication" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.py.test in test_add_adress_book.py" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.aplication" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test_add_group" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test in test_add_adress_book.py" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_add_adress_book.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python.aplication" />
       </list>
     </recent_temporary>
   </component>
@@ -257,18 +257,6 @@
     <history-entry file="Unittests_in_test_add_group_py - 2017.11.05 at 14h 45m 12s.xml">
       <configuration name="Unittests in test_add_group.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_add_adress_book_py - 2017.10.31 at 09h 45m 13s.xml">
-      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_in_test_add_adress_book_py - 2017.10.31 at 09h 47m 11s.xml">
-      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_in_test_add_adress_book_py - 2017.10.31 at 09h 47m 25s.xml">
-      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="py_test_in_test_add_adress_book_py - 2017.10.31 at 09h 49m 23s.xml">
-      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="py_test_in_test_add_adress_book_py - 2017.10.31 at 09h 50m 18s.xml">
       <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
     </history-entry>
@@ -281,20 +269,32 @@
     <history-entry file="py_test_in_test_add_adress_book_py - 2017.11.05 at 14h 08m 15s.xml">
       <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="py_test_in_test_add_adress_book_py - 2017.11.05 at 15h 05m 53s.xml">
+      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_add_adress_book_py - 2017.11.05 at 15h 14m 46s.xml">
+      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_add_adress_book_py - 2017.11.05 at 20h 30m 33s.xml">
+      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_test_add_adress_book_py - 2017.11.05 at 20h 35m 00s.xml">
+      <configuration name="py.test in test_add_adress_book.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883817" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286026" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286026" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286026" sideWeight="0.49583334" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995633" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -525,18 +525,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/aplication.py">
+    <entry file="file://$PROJECT_DIR$/application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="638">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_add_group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="84">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>

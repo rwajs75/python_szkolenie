@@ -1,19 +1,30 @@
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-class Aplication:
+class Application:
 
     def __init__(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
 
-    def logout(self):
+    def open_home_page(self):
         wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
+        wd.get("http://localhost/addressbook/")
 
-    def return_groups_page(self):
+    def login(self, username, password):
         wd = self.wd
-        wd.find_element_by_link_text("group page").click()
+        self.open_groups_page()
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(username)
+        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+
+    def open_groups_page(self):
+        wd = self.wd
+        wd.find_element_by_link_text("groups").click()
 
     def create_group(self, group):
         # otwarcie strony dodawania nowej grupy
@@ -34,24 +45,13 @@ class Aplication:
         wd.find_element_by_name("submit").click()
         self.return_groups_page()
 
-    def open_groups_page(self):
+    def return_groups_page(self):
         wd = self.wd
-        wd.find_element_by_link_text("groups").click()
+        wd.find_element_by_link_text("group page").click()
 
-    def login(self, username, password):
+    def logout(self):
         wd = self.wd
-        self.open_groups_page()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        wd.find_element_by_link_text("Logout").click()
 
     def destroy(self):
         self.wd.quit()
