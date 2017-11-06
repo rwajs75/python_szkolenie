@@ -1,297 +1,581 @@
-F
+C:\Users\rwajs\Documents\GitHub\python_szkolenie\env\Scripts\python.exe "C:\Program Files\JetBrains\PyCharm Community Edition 2017.2.3\helpers\pycharm\_jb_pytest_runner.py" --path C:/Users/rwajs/Documents/GitHub/python_szkolenie/test_add_group.py
+Testing started at 12:22 ...
+Launching py.test with arguments C:/Users/rwajs/Documents/GitHub/python_szkolenie/test_add_group.py in C:\Users\rwajs\Documents\GitHub\python_szkolenie
+
+============================= test session starts =============================
+platform win32 -- Python 3.6.2, pytest-3.2.3, py-1.4.34, pluggy-0.4.0
+rootdir: C:\Users\rwajs\Documents\GitHub\python_szkolenie, inifile:
+collected 2 items
+test_add_group.py F
 test_add_group.py:11 (test_add_group)
-app = <class 'application.Application'>
+app = <application.Application object at 0x0000000003846E80>
 
     def test_add_group(app):
 >       app.login(username="admin", password="secret")
-E       TypeError: login() missing 1 required positional argument: 'self'
 
-test_add_group.py:13: TypeError
-E
-test_add_group.py:11 (test_add_group)
-self = <CallInfo when='teardown' exception: destroy() missing 1 required positional argument: 'self'>
-func = <function call_runtest_hook.<locals>.<lambda> at 0x0000000003AAF400>
-when = 'teardown'
-
-    def __init__(self, func, when):
-        #: context of invocation: one of "setup", "call",
-        #: "teardown", "memocollect"
-        self.when = when
-        self.start = time()
-        try:
->           self.result = func()
-
-env\lib\site-packages\_pytest\runner.py:196: 
+test_add_group.py:13: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-env\lib\site-packages\_pytest\runner.py:182: in <lambda>
-    return CallInfo(lambda: ihook(item=item, **kwds), when=when)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:745: in __call__
-    return self._hookexec(self, self._nonwrappers + self._wrappers, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:339: in _hookexec
-    return self._inner_hookexec(hook, methods, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:334: in <lambda>
-    _MultiCall(methods, kwargs, hook.spec_opts).execute()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:613: in execute
-    return _wrapped_call(hook_impl.function(*args), self.execute)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:254: in _wrapped_call
-    return call_outcome.get_result()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:279: in get_result
-    raise ex[1].with_traceback(ex[2])
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:265: in __init__
-    self.result = func()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:614: in execute
-    res = hook_impl.function(*args)
-env\lib\site-packages\_pytest\runner.py:126: in pytest_runtest_teardown
-    item.session._setupstate.teardown_exact(item, nextitem)
-env\lib\site-packages\_pytest\runner.py:479: in teardown_exact
-    self._teardown_towards(needed_collectors)
-env\lib\site-packages\_pytest\runner.py:485: in _teardown_towards
-    self._pop_and_teardown()
-env\lib\site-packages\_pytest\runner.py:445: in _pop_and_teardown
-    self._teardown_with_finalization(colitem)
-env\lib\site-packages\_pytest\runner.py:463: in _teardown_with_finalization
-    self._callfinalizers(colitem)
-env\lib\site-packages\_pytest\runner.py:460: in _callfinalizers
-    py.builtin._reraise(*exc)
-env\lib\site-packages\_pytest\runner.py:453: in _callfinalizers
-    fin()
-env\lib\site-packages\_pytest\fixtures.py:755: in finish
-    py.builtin._reraise(*e)
+application.py:16: in login
+    self.open_groups_page()
+application.py:27: in open_groups_page
+    wd.find_element_by_link_text("groups").click()
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:389: in find_element_by_link_text
+    return self.find_element(by=By.LINK_TEXT, value=link_text)
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:843: in find_element
+    'value': value})['value']
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:308: in execute
+    self.error_handler.check_response(response)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = <FixtureDef name='app' scope='function' baseid='test_add_group.py' >
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000000003A7F4A8>
+response = {'status': 404, 'value': '{"value":{"error":"no such element","message":"Unable to locate element: groups","stacktrace...ror@chrome://marionette/content/error.js:455:5\\nelement.find/</<@chrome://marionette/content/element.js:290:16\\n"}}'}
 
-    def finish(self):
-        exceptions = []
-        try:
-            while self._finalizer:
+    def check_response(self, response):
+        """
+            Checks that a JSON response from the WebDriver does not have an error.
+    
+            :Args:
+             - response - The JSON response from the WebDriver server as a dictionary
+               object.
+    
+            :Raises: If the response contains an error message.
+            """
+        status = response.get('status', None)
+        if status is None or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, basestring):
+                import json
                 try:
-                    func = self._finalizer.pop()
->                   func()
-E                   TypeError: destroy() missing 1 required positional argument: 'self'
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if status is None:
+                        status = value["status"]
+                        message = value["value"]
+                        if not isinstance(message, basestring):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class = ErrorInResponseException
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = WebDriverException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        else:
+            exception_class = WebDriverException
+        if value == '' or value is None:
+            value = response['value']
+        if isinstance(value, basestring):
+            if exception_class == ErrorInResponseException:
+                raise exception_class(response, value)
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        if 'stackTrace' in value and value['stackTrace']:
+            stacktrace = []
+            try:
+                for frame in value['stackTrace']:
+                    line = self._value_or_default(frame, 'lineNumber', '')
+                    file = self._value_or_default(frame, 'fileName', '<anonymous>')
+                    if line:
+                        file = "%s:%s" % (file, line)
+                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')
+                    if 'className' in frame:
+                        meth = "%s.%s" % (frame['className'], meth)
+                    msg = "    at %s (%s)"
+                    msg = msg % (meth, file)
+                    stacktrace.append(msg)
+            except TypeError:
+                pass
+        if exception_class == ErrorInResponseException:
+            raise exception_class(response, message)
+        elif exception_class == UnexpectedAlertPresentException and 'alert' in value:
+            raise exception_class(message, screen, stacktrace, value['alert'].get('text'))
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: groups
 
-env\lib\site-packages\_pytest\fixtures.py:749: TypeError
+env\lib\site-packages\selenium\webdriver\remote\errorhandler.py:194: NoSuchElementException
 F
 test_add_group.py:16 (test_add_empy_group)
-app = <class 'application.Application'>
+app = <application.Application object at 0x0000000003DF4EB8>
 
     def test_add_empy_group(app):
 >       app.login(username="admin", password="secret")
-E       TypeError: login() missing 1 required positional argument: 'self'
 
-test_add_group.py:18: TypeError
-E
-test_add_group.py:16 (test_add_empy_group)
-self = <CallInfo when='teardown' exception: destroy() missing 1 required positional argument: 'self'>
-func = <function call_runtest_hook.<locals>.<lambda> at 0x0000000003B19510>
-when = 'teardown'
-
-    def __init__(self, func, when):
-        #: context of invocation: one of "setup", "call",
-        #: "teardown", "memocollect"
-        self.when = when
-        self.start = time()
-        try:
->           self.result = func()
-
-env\lib\site-packages\_pytest\runner.py:196: 
+test_add_group.py:18: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-env\lib\site-packages\_pytest\runner.py:182: in <lambda>
-    return CallInfo(lambda: ihook(item=item, **kwds), when=when)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:745: in __call__
-    return self._hookexec(self, self._nonwrappers + self._wrappers, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:339: in _hookexec
-    return self._inner_hookexec(hook, methods, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:334: in <lambda>
-    _MultiCall(methods, kwargs, hook.spec_opts).execute()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:613: in execute
-    return _wrapped_call(hook_impl.function(*args), self.execute)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:254: in _wrapped_call
-    return call_outcome.get_result()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:279: in get_result
-    raise ex[1].with_traceback(ex[2])
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:265: in __init__
-    self.result = func()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:614: in execute
-    res = hook_impl.function(*args)
-env\lib\site-packages\_pytest\runner.py:126: in pytest_runtest_teardown
-    item.session._setupstate.teardown_exact(item, nextitem)
-env\lib\site-packages\_pytest\runner.py:479: in teardown_exact
-    self._teardown_towards(needed_collectors)
-env\lib\site-packages\_pytest\runner.py:485: in _teardown_towards
-    self._pop_and_teardown()
-env\lib\site-packages\_pytest\runner.py:445: in _pop_and_teardown
-    self._teardown_with_finalization(colitem)
-env\lib\site-packages\_pytest\runner.py:463: in _teardown_with_finalization
-    self._callfinalizers(colitem)
-env\lib\site-packages\_pytest\runner.py:460: in _callfinalizers
-    py.builtin._reraise(*exc)
-env\lib\site-packages\_pytest\runner.py:453: in _callfinalizers
-    fin()
-env\lib\site-packages\_pytest\fixtures.py:755: in finish
-    py.builtin._reraise(*e)
+application.py:16: in login
+    self.open_groups_page()
+application.py:27: in open_groups_page
+    wd.find_element_by_link_text("groups").click()
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:389: in find_element_by_link_text
+    return self.find_element(by=By.LINK_TEXT, value=link_text)
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:843: in find_element
+    'value': value})['value']
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:308: in execute
+    self.error_handler.check_response(response)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = <FixtureDef name='app' scope='function' baseid='test_add_group.py' >
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000000003DF4780>
+response = {'status': 404, 'value': '{"value":{"error":"no such element","message":"Unable to locate element: groups","stacktrace...ror@chrome://marionette/content/error.js:455:5\\nelement.find/</<@chrome://marionette/content/element.js:290:16\\n"}}'}
 
-    def finish(self):
-        exceptions = []
-        try:
-            while self._finalizer:
+    def check_response(self, response):
+        """
+            Checks that a JSON response from the WebDriver does not have an error.
+    
+            :Args:
+             - response - The JSON response from the WebDriver server as a dictionary
+               object.
+    
+            :Raises: If the response contains an error message.
+            """
+        status = response.get('status', None)
+        if status is None or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, basestring):
+                import json
                 try:
-                    func = self._finalizer.pop()
->                   func()
-E                   TypeError: destroy() missing 1 required positional argument: 'self'
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if status is None:
+                        status = value["status"]
+                        message = value["value"]
+                        if not isinstance(message, basestring):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class = ErrorInResponseException
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = WebDriverException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        else:
+            exception_class = WebDriverException
+        if value == '' or value is None:
+            value = response['value']
+        if isinstance(value, basestring):
+            if exception_class == ErrorInResponseException:
+                raise exception_class(response, value)
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        if 'stackTrace' in value and value['stackTrace']:
+            stacktrace = []
+            try:
+                for frame in value['stackTrace']:
+                    line = self._value_or_default(frame, 'lineNumber', '')
+                    file = self._value_or_default(frame, 'fileName', '<anonymous>')
+                    if line:
+                        file = "%s:%s" % (file, line)
+                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')
+                    if 'className' in frame:
+                        meth = "%s.%s" % (frame['className'], meth)
+                    msg = "    at %s (%s)"
+                    msg = msg % (meth, file)
+                    stacktrace.append(msg)
+            except TypeError:
+                pass
+        if exception_class == ErrorInResponseException:
+            raise exception_class(response, message)
+        elif exception_class == UnexpectedAlertPresentException and 'alert' in value:
+            raise exception_class(message, screen, stacktrace, value['alert'].get('text'))
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: groups
 
-env\lib\site-packages\_pytest\fixtures.py:749: TypeError
+env\lib\site-packages\selenium\webdriver\remote\errorhandler.py:194: NoSuchElementException
 
 
-=================================== ERRORS ====================================
-_____________________ ERROR at teardown of test_add_group _____________________
-
-self = <CallInfo when='teardown' exception: destroy() missing 1 required positional argument: 'self'>
-func = <function call_runtest_hook.<locals>.<lambda> at 0x0000000003AAF400>
-when = 'teardown'
-
-    def __init__(self, func, when):
-        #: context of invocation: one of "setup", "call",
-        #: "teardown", "memocollect"
-        self.when = when
-        self.start = time()
-        try:
->           self.result = func()
-
-env\lib\site-packages\_pytest\runner.py:196: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-env\lib\site-packages\_pytest\runner.py:182: in <lambda>
-    return CallInfo(lambda: ihook(item=item, **kwds), when=when)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:745: in __call__
-    return self._hookexec(self, self._nonwrappers + self._wrappers, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:339: in _hookexec
-    return self._inner_hookexec(hook, methods, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:334: in <lambda>
-    _MultiCall(methods, kwargs, hook.spec_opts).execute()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:613: in execute
-    return _wrapped_call(hook_impl.function(*args), self.execute)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:254: in _wrapped_call
-    return call_outcome.get_result()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:279: in get_result
-    raise ex[1].with_traceback(ex[2])
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:265: in __init__
-    self.result = func()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:614: in execute
-    res = hook_impl.function(*args)
-env\lib\site-packages\_pytest\runner.py:126: in pytest_runtest_teardown
-    item.session._setupstate.teardown_exact(item, nextitem)
-env\lib\site-packages\_pytest\runner.py:479: in teardown_exact
-    self._teardown_towards(needed_collectors)
-env\lib\site-packages\_pytest\runner.py:485: in _teardown_towards
-    self._pop_and_teardown()
-env\lib\site-packages\_pytest\runner.py:445: in _pop_and_teardown
-    self._teardown_with_finalization(colitem)
-env\lib\site-packages\_pytest\runner.py:463: in _teardown_with_finalization
-    self._callfinalizers(colitem)
-env\lib\site-packages\_pytest\runner.py:460: in _callfinalizers
-    py.builtin._reraise(*exc)
-env\lib\site-packages\_pytest\runner.py:453: in _callfinalizers
-    fin()
-env\lib\site-packages\_pytest\fixtures.py:755: in finish
-    py.builtin._reraise(*e)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-self = <FixtureDef name='app' scope='function' baseid='test_add_group.py' >
-
-    def finish(self):
-        exceptions = []
-        try:
-            while self._finalizer:
-                try:
-                    func = self._finalizer.pop()
->                   func()
-E                   TypeError: destroy() missing 1 required positional argument: 'self'
-
-env\lib\site-packages\_pytest\fixtures.py:749: TypeError
-__________________ ERROR at teardown of test_add_empy_group ___________________
-
-self = <CallInfo when='teardown' exception: destroy() missing 1 required positional argument: 'self'>
-func = <function call_runtest_hook.<locals>.<lambda> at 0x0000000003B19510>
-when = 'teardown'
-
-    def __init__(self, func, when):
-        #: context of invocation: one of "setup", "call",
-        #: "teardown", "memocollect"
-        self.when = when
-        self.start = time()
-        try:
->           self.result = func()
-
-env\lib\site-packages\_pytest\runner.py:196: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-env\lib\site-packages\_pytest\runner.py:182: in <lambda>
-    return CallInfo(lambda: ihook(item=item, **kwds), when=when)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:745: in __call__
-    return self._hookexec(self, self._nonwrappers + self._wrappers, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:339: in _hookexec
-    return self._inner_hookexec(hook, methods, kwargs)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:334: in <lambda>
-    _MultiCall(methods, kwargs, hook.spec_opts).execute()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:613: in execute
-    return _wrapped_call(hook_impl.function(*args), self.execute)
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:254: in _wrapped_call
-    return call_outcome.get_result()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:279: in get_result
-    raise ex[1].with_traceback(ex[2])
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:265: in __init__
-    self.result = func()
-env\lib\site-packages\_pytest\vendored_packages\pluggy.py:614: in execute
-    res = hook_impl.function(*args)
-env\lib\site-packages\_pytest\runner.py:126: in pytest_runtest_teardown
-    item.session._setupstate.teardown_exact(item, nextitem)
-env\lib\site-packages\_pytest\runner.py:479: in teardown_exact
-    self._teardown_towards(needed_collectors)
-env\lib\site-packages\_pytest\runner.py:485: in _teardown_towards
-    self._pop_and_teardown()
-env\lib\site-packages\_pytest\runner.py:445: in _pop_and_teardown
-    self._teardown_with_finalization(colitem)
-env\lib\site-packages\_pytest\runner.py:463: in _teardown_with_finalization
-    self._callfinalizers(colitem)
-env\lib\site-packages\_pytest\runner.py:460: in _callfinalizers
-    py.builtin._reraise(*exc)
-env\lib\site-packages\_pytest\runner.py:453: in _callfinalizers
-    fin()
-env\lib\site-packages\_pytest\fixtures.py:755: in finish
-    py.builtin._reraise(*e)
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-
-self = <FixtureDef name='app' scope='function' baseid='test_add_group.py' >
-
-    def finish(self):
-        exceptions = []
-        try:
-            while self._finalizer:
-                try:
-                    func = self._finalizer.pop()
->                   func()
-E                   TypeError: destroy() missing 1 required positional argument: 'self'
-
-env\lib\site-packages\_pytest\fixtures.py:749: TypeError
 ================================== FAILURES ===================================
 _______________________________ test_add_group ________________________________
 
-app = <class 'application.Application'>
+app = <application.Application object at 0x0000000003846E80>
 
     def test_add_group(app):
 >       app.login(username="admin", password="secret")
-E       TypeError: login() missing 1 required positional argument: 'self'
 
-test_add_group.py:13: TypeError
+test_add_group.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+application.py:16: in login
+    self.open_groups_page()
+application.py:27: in open_groups_page
+    wd.find_element_by_link_text("groups").click()
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:389: in find_element_by_link_text
+    return self.find_element(by=By.LINK_TEXT, value=link_text)
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:843: in find_element
+    'value': value})['value']
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:308: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000000003A7F4A8>
+response = {'status': 404, 'value': '{"value":{"error":"no such element","message":"Unable to locate element: groups","stacktrace...ror@chrome://marionette/content/error.js:455:5\\nelement.find/</<@chrome://marionette/content/element.js:290:16\\n"}}'}
+
+    def check_response(self, response):
+        """
+            Checks that a JSON response from the WebDriver does not have an error.
+    
+            :Args:
+             - response - The JSON response from the WebDriver server as a dictionary
+               object.
+    
+            :Raises: If the response contains an error message.
+            """
+        status = response.get('status', None)
+        if status is None or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, basestring):
+                import json
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if status is None:
+                        status = value["status"]
+                        message = value["value"]
+                        if not isinstance(message, basestring):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class = ErrorInResponseException
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = WebDriverException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        else:
+            exception_class = WebDriverException
+        if value == '' or value is None:
+            value = response['value']
+        if isinstance(value, basestring):
+            if exception_class == ErrorInResponseException:
+                raise exception_class(response, value)
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        if 'stackTrace' in value and value['stackTrace']:
+            stacktrace = []
+            try:
+                for frame in value['stackTrace']:
+                    line = self._value_or_default(frame, 'lineNumber', '')
+                    file = self._value_or_default(frame, 'fileName', '<anonymous>')
+                    if line:
+                        file = "%s:%s" % (file, line)
+                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')
+                    if 'className' in frame:
+                        meth = "%s.%s" % (frame['className'], meth)
+                    msg = "    at %s (%s)"
+                    msg = msg % (meth, file)
+                    stacktrace.append(msg)
+            except TypeError:
+                pass
+        if exception_class == ErrorInResponseException:
+            raise exception_class(response, message)
+        elif exception_class == UnexpectedAlertPresentException and 'alert' in value:
+            raise exception_class(message, screen, stacktrace, value['alert'].get('text'))
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: groups
+
+env\lib\site-packages\selenium\webdriver\remote\errorhandler.py:194: NoSuchElementException
 _____________________________ test_add_empy_group _____________________________
 
-app = <class 'application.Application'>
+app = <application.Application object at 0x0000000003DF4EB8>
 
     def test_add_empy_group(app):
 >       app.login(username="admin", password="secret")
-E       TypeError: login() missing 1 required positional argument: 'self'
 
-test_add_group.py:18: TypeError
-====================== 2 failed, 2 error in 0.87 seconds ======================
+test_add_group.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+application.py:16: in login
+    self.open_groups_page()
+application.py:27: in open_groups_page
+    wd.find_element_by_link_text("groups").click()
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:389: in find_element_by_link_text
+    return self.find_element(by=By.LINK_TEXT, value=link_text)
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:843: in find_element
+    'value': value})['value']
+env\lib\site-packages\selenium\webdriver\remote\webdriver.py:308: in execute
+    self.error_handler.check_response(response)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000000003DF4780>
+response = {'status': 404, 'value': '{"value":{"error":"no such element","message":"Unable to locate element: groups","stacktrace...ror@chrome://marionette/content/error.js:455:5\\nelement.find/</<@chrome://marionette/content/element.js:290:16\\n"}}'}
+
+    def check_response(self, response):
+        """
+            Checks that a JSON response from the WebDriver does not have an error.
+    
+            :Args:
+             - response - The JSON response from the WebDriver server as a dictionary
+               object.
+    
+            :Raises: If the response contains an error message.
+            """
+        status = response.get('status', None)
+        if status is None or status == ErrorCode.SUCCESS:
+            return
+        value = None
+        message = response.get("message", "")
+        screen = response.get("screen", "")
+        stacktrace = None
+        if isinstance(status, int):
+            value_json = response.get('value', None)
+            if value_json and isinstance(value_json, basestring):
+                import json
+                try:
+                    value = json.loads(value_json)
+                    if len(value.keys()) == 1:
+                        value = value['value']
+                    status = value.get('error', None)
+                    if status is None:
+                        status = value["status"]
+                        message = value["value"]
+                        if not isinstance(message, basestring):
+                            value = message
+                            message = message.get('message')
+                    else:
+                        message = value.get('message', None)
+                except ValueError:
+                    pass
+    
+        exception_class = ErrorInResponseException
+        if status in ErrorCode.NO_SUCH_ELEMENT:
+            exception_class = NoSuchElementException
+        elif status in ErrorCode.NO_SUCH_FRAME:
+            exception_class = NoSuchFrameException
+        elif status in ErrorCode.NO_SUCH_WINDOW:
+            exception_class = NoSuchWindowException
+        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:
+            exception_class = StaleElementReferenceException
+        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:
+            exception_class = ElementNotVisibleException
+        elif status in ErrorCode.INVALID_ELEMENT_STATE:
+            exception_class = InvalidElementStateException
+        elif status in ErrorCode.INVALID_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR \
+                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:
+            exception_class = InvalidSelectorException
+        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:
+            exception_class = ElementNotSelectableException
+        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:
+            exception_class = ElementNotInteractableException
+        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:
+            exception_class = WebDriverException
+        elif status in ErrorCode.TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.SCRIPT_TIMEOUT:
+            exception_class = TimeoutException
+        elif status in ErrorCode.UNKNOWN_ERROR:
+            exception_class = WebDriverException
+        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:
+            exception_class = UnexpectedAlertPresentException
+        elif status in ErrorCode.NO_ALERT_OPEN:
+            exception_class = NoAlertPresentException
+        elif status in ErrorCode.IME_NOT_AVAILABLE:
+            exception_class = ImeNotAvailableException
+        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:
+            exception_class = ImeActivationFailedException
+        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:
+            exception_class = MoveTargetOutOfBoundsException
+        else:
+            exception_class = WebDriverException
+        if value == '' or value is None:
+            value = response['value']
+        if isinstance(value, basestring):
+            if exception_class == ErrorInResponseException:
+                raise exception_class(response, value)
+            raise exception_class(value)
+        if message == "" and 'message' in value:
+            message = value['message']
+    
+        screen = None
+        if 'screen' in value:
+            screen = value['screen']
+    
+        stacktrace = None
+        if 'stackTrace' in value and value['stackTrace']:
+            stacktrace = []
+            try:
+                for frame in value['stackTrace']:
+                    line = self._value_or_default(frame, 'lineNumber', '')
+                    file = self._value_or_default(frame, 'fileName', '<anonymous>')
+                    if line:
+                        file = "%s:%s" % (file, line)
+                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')
+                    if 'className' in frame:
+                        meth = "%s.%s" % (frame['className'], meth)
+                    msg = "    at %s (%s)"
+                    msg = msg % (meth, file)
+                    stacktrace.append(msg)
+            except TypeError:
+                pass
+        if exception_class == ErrorInResponseException:
+            raise exception_class(response, message)
+        elif exception_class == UnexpectedAlertPresentException and 'alert' in value:
+            raise exception_class(message, screen, stacktrace, value['alert'].get('text'))
+>       raise exception_class(message, screen, stacktrace)
+E       selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: groups
+
+env\lib\site-packages\selenium\webdriver\remote\errorhandler.py:194: NoSuchElementException
+========================== 2 failed in 17.06 seconds ==========================
+Process finished with exit code 0
