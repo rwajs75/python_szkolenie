@@ -13,7 +13,7 @@ class Application:
 
     def login(self, username, password):
         wd = self.wd
-        self.open_groups_page()
+        self.open_home_page()
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys(password)
