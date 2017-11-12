@@ -13,7 +13,6 @@ def app(request):
     else:
         if not fixture.is_valid():
             fixture = Application()
-    print("tu byłem")
     fixture.session.ensure_login(username="admin", password="secret")
     return fixture
 
