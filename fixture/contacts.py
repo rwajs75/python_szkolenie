@@ -6,6 +6,10 @@ class ContactsHelper:
     def __init__(self, app):
         self.app = app
 
+    def open_adress_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def open_add_new(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
@@ -71,6 +75,7 @@ class ContactsHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.open_adress_page()
         # zaznaczenie pierwszego kontaktu
         wd.find_element_by_name("selected[]").click()
         # przycisk delete
@@ -79,6 +84,7 @@ class ContactsHelper:
 
     def modify_first_contact(self, data_adress):
         wd = self.app.wd
+        self.open_adress_page()
         # zaznaczenie pierwszego kontaktu
         wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # zmiana danych
