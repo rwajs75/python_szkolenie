@@ -8,7 +8,8 @@ class ContactsHelper:
 
     def open_adress_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not wd.current_url.endswith("/addressbook/"):
+            wd.find_element_by_link_text("home").click()
 
     def open_add_new(self):
         wd = self.app.wd
