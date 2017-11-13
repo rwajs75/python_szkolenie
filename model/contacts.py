@@ -2,7 +2,8 @@ __autor__ = 'Roman'
 
 
 class Contacts:
-    def __init__(self, firstname, lastname, nickname, company, adress, home, mobile, work, fax, email, byear):
+    def __init__(self, firstname=None, lastname=None, nickname=None, company=None, adress=None, home=None, mobile=None,
+                 work=None, fax=None, email=None, byear=None):
         self.firstname = firstname
         self.lastname = lastname
         self.nickname = nickname
