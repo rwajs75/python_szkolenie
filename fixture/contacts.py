@@ -1,5 +1,5 @@
 __autor__ = 'Roman'
-
+from model.contacts import Contacts
 
 class ContactsHelper:
 
@@ -76,7 +76,6 @@ class ContactsHelper:
         wd = self.app.wd
         self.open_adress_page()
         wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        # zmiana danych
         self.fill_contacts_form(new_data_adress)
         wd.find_element_by_xpath("//*[@id='content']/form[1]/input[22]").click()
 
@@ -84,3 +83,14 @@ class ContactsHelper:
         wd = self.app.wd
         self.open_adress_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contacts_list(self):
+        wd = self.app.wd
+        self.open_adress_page()
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            lastname = element.find_elements_by_css_selector("td")[1].text
+            firstname = element.find_elements_by_css_selector("td")[2].text
+            contacts.append(Contacts(id=id, firstname=firstname, lastname=lastname))
+        return contacts
