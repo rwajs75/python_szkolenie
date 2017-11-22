@@ -62,22 +62,31 @@ class ContactsHelper:
         self.contact_cache = None
 
     def select_first_contact(self):
+        self.select_contact_by_index(0)
+
+    def select_contact_by_index(self, index):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_adress_page()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # przycisk delete
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
     def modify_first_contact(self, new_data_adress):
+        self.modify_contact_by_index
+
+    def modify_contact_by_index(self, index, new_data_adress):
         wd = self.app.wd
         self.open_adress_page()
-        wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr[index+1]/td[8]/a/img").click()
         self.fill_contacts_form(new_data_adress)
         wd.find_element_by_xpath("//*[@id='content']/form[1]/input[22]").click()
         self.contact_cache = None
