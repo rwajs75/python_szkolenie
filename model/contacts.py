@@ -2,10 +2,11 @@ __autor__ = 'Roman'
 from sys import maxsize
 
 class Contacts:
-    def __init__(self, firstname=None, lastname=None, nickname=None, company=None, adress=None, home=None, mobile=None,
-                 work=None, fax=None, email=None, byear=None, id=None):
+    def __init__(self, name=None, firstname=None, lastname=None, nickname=None, company=None, adress=None, home=None, mobile=None,
+                 work=None, fax=None, all_phones_from_home_page=None, email=None, byear=None, id=None):
         self.firstname = firstname
         self.lastname = lastname
+        self.name = name
         self.nickname = nickname
         self.company = company
         self.adress = adress
@@ -16,6 +17,7 @@ class Contacts:
         self.email = email
         self.byear = byear
         self.id = id
+        self.all_phones_from_home_page = all_phones_from_home_page
 
     def __repr__(self):
         return "%s:%s %s" % (self.id, self.firstname, self.lastname)
