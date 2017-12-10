@@ -4,7 +4,7 @@ import random
 from time import sleep
 
 
-def test_delete_some_contact(app, db):
+def test_delete_some_contact(app, db, check_ui):
     if len(db.get_contacts_list()) == 0:
         app.contacts.create(Contacts(firstname="Tester", lastname="Test"))
     old_contacts = db.get_contacts_list()
@@ -14,4 +14,6 @@ def test_delete_some_contact(app, db):
     new_contacts = db.get_contacts_list()
     old_contacts.remove(contact)
     assert old_contacts == new_contacts
+    if check_ui:
+        assert sorted(new_contacts, key=Contacts.id_or_max) == sorted(app.contacts.get_contacts_list(), key=Contacts.id_or_max)
 

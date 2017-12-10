@@ -4,7 +4,7 @@ import json
 import os.path
 import importlib
 from fixture.application import Application
-from fixture.db import DbFixture
+from fixture.orm import ORMFixture
 
 
 fixture = None
@@ -31,9 +31,9 @@ def app(request):
 @pytest.fixture(scope="session")
 def db(request):
     db_config = load_config(request.config.getoption("--target"))['db']
-    dbfixture = DbFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'], password=db_config['password'])
+    dbfixture = ORMFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'], password=db_config['password'])
     def fin():
-        fixture.destroy()
+        pass #fixture.destroy()
     request.addfinalizer(fin)
     return dbfixture
 
@@ -45,9 +45,14 @@ def stop(request):
     request.addfinalizer(fin)
     return fixture
 
+@pytest.fixture
+def check_ui(request):
+    return request.config.getoption("--check_ui")
+
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
     parser.addoption("--target", action="store", default="target.json")
+    parser.addoption("--check_ui", action="store_true")
 
 def pytest_generate_tests(metafunc):
     for fixture in metafunc.fixturenames:
