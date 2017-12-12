@@ -4,7 +4,7 @@ from datetime import datetime
 from model.group import Group
 from model.contacts import Contacts
 from pymysql.converters import decoders
-
+from model.address_in_groups import AddressInGroups
 
 class ORMFixture:
 
@@ -23,6 +23,12 @@ class ORMFixture:
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
         nickname = Optional(str, column='nickname')
+        deprecated = Optional(datetime, column='deprecated')
+
+    class ORMAddressInGroup(db.Entity):
+        _table_ = 'address_in_groups'
+        contact_id = PrimaryKey(int, column='id')
+        group_id = Optional(int, column='group_id')
         deprecated = Optional(datetime, column='deprecated')
 
     def __init__(self, host, name, user, password):
@@ -46,3 +52,12 @@ class ORMFixture:
     @db_session
     def get_contacts_list(self):
         return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None))
+
+    def convert_to_list(self, address_in_groups):
+        def convert(address_in_group):
+            return AddressInGroups(id=address_in_group.id, group_id=address_in_group.group_id)
+        return list(map(convert, address_in_groups))
+
+    @db_session
+    def get_contacts_in_group(self):
+        return self.convert_to_list(select(a for a in ORMFixture.ORMAddressInGroup if a.deprecated is None))

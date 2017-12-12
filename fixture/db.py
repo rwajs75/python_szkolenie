@@ -2,7 +2,7 @@ __autor__ = 'Roman'
 import mysql.connector
 from model.group import Group
 from model.contacts import Contacts
-
+from model.address_in_groups import AddressInGroups
 
 class DbFixture:
 
@@ -34,6 +34,18 @@ class DbFixture:
             for row in cursor:
                 (id, firstname, lastname, nickname) = row
                 list.append(Contacts(id=str(id), firstname=firstname, lastname=lastname, nickname=nickname))
+        finally:
+            cursor.close()
+        return list
+
+    def get_contacts_in_group(self):
+        list =[]
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select distinct group_id from address_in_groups WHERE deprecated = '0000-00-00 00:00:00'")
+            for row in cursor:
+                group_id = row
+                list.append(AddressInGroups(group_id=group_id))
         finally:
             cursor.close()
         return list

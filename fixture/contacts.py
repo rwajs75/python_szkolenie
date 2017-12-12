@@ -1,6 +1,7 @@
 __autor__ = 'Roman'
 from model.contacts import Contacts
 import re
+import random
 
 class ContactsHelper:
 
@@ -174,3 +175,44 @@ class ContactsHelper:
         return Contacts(name=name, home=home, mobile=mobile, work=work, fax=fax, adress=adress,
                         email=email)
 
+    def add_contact_to_group_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_adress_page()
+        self.select_contact_by_id(contact_id)
+        wd.save_screenshot('zaznaczony.png')
+        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % group_id).click()
+        wd.find_element_by_xpath("//input[@name='add']").click()
+        wd.find_element_by_xpath("//*[@id='content']/div/i/a").click()
+
+    def del_contact_from_group_id(self,group_id):
+        wd = self.app.wd
+        self.open_adress_page()
+        wd.find_element_by_xpath("//option[@value='%s']" % group_id).click()
+        contacts_group = self.get_contacts_list_in_group()
+        contact_group = random.choice(contacts_group)
+        self.select_contact_by_id(contact_group.id)
+        wd.save_screenshot('zaznaczony_do_usuniecia.png')
+        wd.find_element_by_xpath("//*[@id='content']/form[2]/div[3]/input").click()
+        wd.find_element_by_xpath("//*[@id='content']/div/i/a").click()
+        wd.save_screenshot('zaznaczony_po_usunieciu.png')
+
+    def contact_group(self, group_id):
+        wd = self.app.wd
+        self.open_adress_page()
+        wd.find_element_by_xpath("//option[@value='%s']" % group_id).click()
+
+    def all_contacts(self):
+        wd = self.app.wd
+        self.open_adress_page()
+        wd.find_element_by_xpath("//option[@value='']").click()
+
+    def get_contacts_list_in_group(self):
+        wd = self.app.wd
+        self.contact_cache = []
+        for element in wd.find_elements_by_name("entry"):
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            cells = element.find_elements_by_tag_name("td")
+            lastname = cells[1].text
+            firstname = cells[2].text
+            self.contact_cache.append(Contacts(id=id, firstname=firstname, lastname=lastname))
+        return list(self.contact_cache)
