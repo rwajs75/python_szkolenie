@@ -1,11 +1,12 @@
 __autor__ = 'Roman'
-from fixture.db import DbFixture
+from fixture.orm import ORMFixture
+from model.group import Group
 
 
-db = DbFixture(host="localhost", name="addressbook", user="root", password="")
+db = ORMFixture(host="localhost", name="addressbook", user="root", password="")
 
 try:
-    l = db.get_contacts_in_group()
+    l = db.get_contacts_in_group(Group(id="148"))
     for item in l:
         print(item)
     print(len(l))
