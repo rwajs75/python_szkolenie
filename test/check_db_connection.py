@@ -6,7 +6,7 @@ from model.group import Group
 db = ORMFixture(host="localhost", name="addressbook", user="root", password="")
 
 try:
-    l = db.get_contacts_in_group(Group(id="148"))
+    l = db.get_group_list()
     for item in l:
         print(item)
     print(len(l))
