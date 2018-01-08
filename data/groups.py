@@ -8,7 +8,7 @@ import json
 # ]
 
 
-with open("../data/groups.json") as f:
+with open("c:/Users/rwajs/Documents/GitHub/python_szkolenie/data/groups.json") as f:
     try:
         read_plik = json.load(f)
     except ValueError as ex:
