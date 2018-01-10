@@ -36,5 +36,8 @@ class AddressBook:
     def create_group(self, group):
         self.fixture.group.create(group)
 
+    def delete_group(self, group):
+        self.fixture.group.delete_group_by_id(group.id)
+
     def group_list_should_be_equal(self, list1, list2):
         assert sorted(list1, key=Group.id_or_max) == sorted(list2, key=Group.id_or_max)
